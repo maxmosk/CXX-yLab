@@ -6,19 +6,21 @@
 #include <cstdint>
 
 
-typedef uint32_t lfu_count_t;
+typedef size_t lfu_count_t;
 
 
 template <typename key_t>
 class lfu_pare
 {
-    key_t *key;
+    key_t key;
     lfu_count_t used;
 
     public:
         lfu_pare () : key (nullptr), used (0) {}
 
-        const key_t *getKey () const
+        lfu_pare (key_t init_key) : key (nullptr), used (0) {}
+
+        const key_t getKey () const
         {   return key;   }
 
         lfu_count_t getUsed () const
@@ -32,15 +34,40 @@ template <typename elem_t>
 class lfu_cache
 {
     size_t size;
+    size_t used;
     lfu_pare<elem_t> *cells;
 
-    int insert (elem_t elem)
+    size_t lookupLFU () const
     {
+        size_t minUsed = SIZE_MAX;
+        size_t minIndex = 0;
 
+        for (size_t i = 0; i < used; i++)
+        {
+            if (cells[i].getUsed() <= minUsed)
+            {
+                minUsed = cells[i].getUsed();
+                minIndex = i;
+            }
+        }
+
+        return minIndex;
+    }
+
+    void insert (elem_t elem)
+    {
+        if (size == 0)
+        {
+            return;
+        }
+        else
+        {
+            cells[lookupLFU] = lfu_pare<elem_t>(elem);
+        }
     }
 
     public:
-        lfu_cache (size_t size) : size (size)
+        lfu_cache (size_t size) : size (size), used (0)
         {
             cells = new lfu_pare<elem_t>[size];
         }
@@ -52,8 +79,10 @@ class lfu_cache
         {
             for (size_t i = 0; i < size; i++)
             {
-                if (*elem == cells[i])
-                {   return &cells[i];   }
+                if (*elem == cells[i].getKey ())
+                {
+                    return &cells[i];
+                }
                 else
                 {
                     insert (elem);
