@@ -1,7 +1,6 @@
 #ifndef __LFU_H_INCLUDED__
 #define __LFU_H_INCLUDED__
 
-#include <cstdio>
 #include <cstdlib>
 #include <cstdint>
 
