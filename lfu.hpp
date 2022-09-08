@@ -1,3 +1,6 @@
+#ifndef __LFU_H_INCLUDED__
+#define __LFU_H_INCLUDED__
+
 #include <cstdio>
 #include <cstdlib>
 #include <cstdint>
@@ -65,11 +68,5 @@ class lfu_cache
         }
 };
 
-
-int main (void)
-{
-    lfu_cache<int> my_cache (100);
-    printf ("Hello, Max! Tuzya is cute! Cache size is %zd.\n", my_cache.getSize ());
-    return 0;
-}
+#endif
 
