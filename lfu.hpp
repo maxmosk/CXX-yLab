@@ -55,7 +55,7 @@ class lfu_cache
         size_t lookEnd = (size > used) ? (used + 1) : size;
         for (size_t i = 0; i < lookEnd; i++)
         {
-            if (cells[i].getUsed() <= minUsed)
+            if (cells[i].getUsed() < minUsed)
             {
 #ifdef __DEBUG
                 printf("*** %zu-th used: %zu\n", i, cells[i].getUsed());
@@ -107,6 +107,9 @@ class lfu_cache
                 if (elem == cells[i].getKey())
                 {
                     cells[i].use();
+#ifdef __DEBUG
+                    printf("*** Hit to cache by index: %zu\n", i);
+#endif
                     return true;
                 }
             }
