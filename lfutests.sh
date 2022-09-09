@@ -2,7 +2,6 @@
 I=1
 while IFS=% read -r source exp; do
         res=$(echo $source | $1)
-        #res=$(echo "$res" | tail -n +2)
         if [ x"$exp" != x"$res" ]; then
                 echo TEST $I '('$source')' FAILED: expexted "$exp", got "$res"
 
