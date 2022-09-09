@@ -91,7 +91,7 @@ class lfu_cache
 
 
     public:
-        lfu_cache(size_t size) : size (size), used (0)
+        lfu_cache(size_t initSize) : size (initSize), used (0)
         {
             cells = new lfu_pare<elem_t>[size];
         }

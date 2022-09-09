@@ -14,7 +14,7 @@ SOURCES=$(wildcard src/code/*.cpp)
 SOURCES=$(wildcard $(SOURCEDIR)/*.cpp)
 HEADFILES=$(wildcard $(HEADERDIR)/*.hpp)
 OBJFILES=$(patsubst $(SOURCEDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
-EXECUTABLE=$(BUILDDIR)/a.out
+EXECUTABLE=$(BUILDDIR)/lfucalc
 
 
 all: dir $(EXECUTABLE)
