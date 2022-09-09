@@ -52,16 +52,21 @@ class lfu_cache
         lfu_count_t minUsed = cells[0].getUsed();
         size_t minIndex = 0;
 
-        for (size_t i = 0; i <= used; i++)
+        size_t lookEnd = (size > used) ? (used + 1) : size;
+        for (size_t i = 0; i < lookEnd; i++)
         {
             if (cells[i].getUsed() <= minUsed)
             {
+#ifdef __DEBUG
                 printf("*** %zu-th used: %zu\n", i, cells[i].getUsed());
+#endif
                 minUsed = cells[i].getUsed();
                 minIndex = i;
             }
         }
+#ifdef __DEBUG
         printf("*** Looked up: %zd\n", minIndex);
+#endif
 
         return minIndex;
     }
@@ -74,8 +79,13 @@ class lfu_cache
         }
         else
         {
-            cells[lookupLFU()] = lfu_pare<elem_t>(elem);
-            used++;
+            size_t indexLFU = lookupLFU();
+            cells[indexLFU] = lfu_pare<elem_t>(elem);
+
+            if (indexLFU < (size - 1))
+            {
+                used++;
+            }
         }
     }
 
