@@ -26,6 +26,11 @@ class ideal_cache
             return size;
         }
 
+        void putElem(const elem_t &src)
+        {
+            sequence.push_back(src);
+        }
+
 
         ~ideal_cache()
         {
