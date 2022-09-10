@@ -15,6 +15,8 @@ int main(void)
         cache.putElem(pageN);
     }
 
+    printf("%zu", cache.getHits());
+
 
     return 0;
 }
