@@ -11,13 +11,13 @@ class ideal_cache
     size_t used;
     elem_t *cells;
     
-    std::vector<elem_t> pageSequence;
+    std::vector<elem_t> sequence;
 
     public:
         ideal_cache(size_t initSize) : size (initSize), used (0)
         {
             cells = new elem_t[size];
-            pageSequence.reserve(size * 10);
+            sequence.reserve(size * 10);
         }
 
 
