@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 #include <cstdint>
+#include <cstring>
 
 
 typedef size_t lfu_count_t;
@@ -94,6 +95,12 @@ class lfu_cache
         lfu_cache(size_t initSize) : size (initSize), used (0)
         {
             cells = new lfu_pare<elem_t>[size];
+        }
+
+        lfu_cache(const lfu_cache<elem_t>&src) : size (src->size), used (src->used)
+        {
+            cells = new lfu_pare<elem_t>[size];
+            memcpy(cells, src->cells, size * sizeof *cells);
         }
 
 
