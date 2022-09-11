@@ -28,6 +28,11 @@ class ideal_cache
 
         size_t getHits() const
         {
+            size_t nelems = sequence.size();
+            for (size_t i = 0; i < nelems; i++)
+            {
+            }
+
             return 0;
         }
 
