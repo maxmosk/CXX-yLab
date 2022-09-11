@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <cstdint>
 #include <cstring>
+#include <unordered_map>
 
 
 typedef size_t lfu_count_t;
@@ -47,6 +48,7 @@ class lfu_cache
     size_t size;
     size_t used;
     lfu_pare<elem_t> *cells;
+    std::unordered_map<elem_t, size_t> finder;
 
     size_t lookupLFU() const
     {
