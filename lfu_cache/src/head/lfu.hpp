@@ -77,7 +77,9 @@ class lfu_cache
         else
         {
             size_t indexLFU = lookupLFU();
+            finder.erase(cells[indexLFU].getKey());
             cells[indexLFU] = lfu_pare<elem_t>(elem);
+            finder[elem] = indexLFU;
 
             if (indexLFU < (size - 1))
             {
@@ -102,18 +104,16 @@ public:
 
     bool lookup(const elem_t &elem)
     {
-        for (size_t i = 0; i < size; i++)
+        if (finder.find(elem) != finder.end())
         {
-            if (elem == cells[i].getKey())
-            {
-                cells[i].use();
-                return true;
-            }
+            cells[finder[elem]].use();
+            return true;
         }
-
-
-        insert(elem);
-        return false;
+        else
+        {
+            insert(elem);
+            return false;
+        }
     }
 
 
