@@ -104,11 +104,13 @@ public:
 
     bool lookup(const elem_t &elem)
     {
-        if (finder.find(elem) != finder.end())
+        auto search = finder.find(elem);
+        if (search != finder.end())
         {
             cells[finder[elem]].use();
             return true;
         }
+
         else
         {
             insert(elem);
