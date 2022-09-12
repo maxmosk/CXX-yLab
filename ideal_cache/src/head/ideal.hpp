@@ -9,6 +9,7 @@
 template <typename elem_t>
 class ideal_cache
 {
+    //================================== Private
     size_t size;
     size_t used = 0;
     elem_t *cells;
@@ -28,13 +29,14 @@ class ideal_cache
         for ()
     }
     
-    bool find(elem_t item)
+    bool lookup(elem_t item)
     {
         auto search = finderCache.find();
         return search != finderCache.end();
     }
 
 public:
+    //================================== Public
     ideal_cache(size_t initSize) : size (initSize), used (0)
     {
         cells = new elem_t[size];
@@ -42,11 +44,6 @@ public:
         sequence.reserve(size * 10);
     }
 
-
-    size_t getSize() const
-    {
-        return size;
-    }
 
     size_t getHits()
     {
