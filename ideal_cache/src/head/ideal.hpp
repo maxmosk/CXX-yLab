@@ -23,6 +23,7 @@ class ideal_cache
 
     size_t lookupToReplace()
     {
+        //printf("*** %zu < %zu?\n", used, size);
         if (used < size)
         {
             return used;
@@ -32,12 +33,12 @@ class ideal_cache
         {
             size_t foundIndex = SIZE_MAX;
             size_t foundEntry = 0;
-            size_t seqlen = sequence.size();
+            size_t seqLen = sequence.size();
 
             for (size_t i = 0; i < used; i++)
             {
                 size_t curEntry = SIZE_MAX;
-                for (size_t j = curPos; j < seqlen; j++)
+                for (size_t j = curPos; j < seqLen; j++)
                 {
                     if (sequence[j] == cells[i])
                     {
@@ -53,6 +54,7 @@ class ideal_cache
                 }
             }
 
+            //printf("*** Founded index %zu", foundIndex);
             return foundIndex;
         }
     }
@@ -82,11 +84,12 @@ class ideal_cache
         else
         {
             size_t indexFind = lookupToReplace();
+            //printf("*** Replaced %d for %d by index %zu\n", cells[indexFind], elem, indexFind);
             finderCache.erase(cells[indexFind]);
             cells[indexFind] = elem;
             finderCache[elem] = indexFind;
 
-            if (indexFind < (size - 1))
+            if (indexFind < size)
             {
                 used++;
             }
