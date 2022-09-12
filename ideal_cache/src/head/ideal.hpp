@@ -15,15 +15,16 @@ class ideal_cache
     elem_t *cells;
     
     std::vector<elem_t> sequence;
+    size_t curPos = 0
+
     std::unordered_map<elem_t, size_t> finderCache;
 
 
-    size_t findToReplace(size_t pos)
+    size_t lookupToReplace()
     {
         if (used < size)
         {
-            used++;
-            return used - 1;
+            return used;
         }
 
     }
@@ -38,7 +39,29 @@ class ideal_cache
 
         else
         {
+            insert(elem);
+            return false;
+        }
+    }
 
+    void insert(elem_t elem)
+    {
+        if (size == 0)
+        {
+            return;
+        }
+
+        else
+        {
+            size_t indexFind = lookupToReplace();
+            finderCache.erase(cells[indexFind]);
+            cells[indexFind] = elem;
+            finderCache[elem] = indexFind;
+
+            if (indexFind < (size - 1))
+            {
+                used++;
+            }
         }
     }
 
@@ -56,9 +79,9 @@ public:
     {
         size_t hits = 0;
         size_t nelems = sequence.size();
-        for (size_t i = 0; i < nelems; i++)
+        for (; curPos < nelems; curPos++)
         {
-            hits += lookup(sequence[i]);
+            hits += lookup(sequence[curPos]);
         }
 
         return hits;
