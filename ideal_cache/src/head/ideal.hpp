@@ -4,6 +4,7 @@
 #include <vector>
 #include <unordered_map>
 #include <cstring>
+#include <cstdint>
 
 
 template <typename elem_t>
@@ -15,7 +16,7 @@ class ideal_cache
     elem_t *cells;
     
     std::vector<elem_t> sequence;
-    size_t curPos = 0
+    size_t curPos = 0;
 
     std::unordered_map<elem_t, size_t> finderCache;
 
@@ -27,6 +28,33 @@ class ideal_cache
             return used;
         }
 
+        else
+        {
+            size_t foundIndex = SIZE_MAX;
+            size_t foundEntry = 0;
+            size_t seqlen = sequence.size();
+
+            for (size_t i = 0; i < used; i++)
+            {
+                size_t curEntry = SIZE_MAX;
+                for (size_t j = curPos; j < seqlen; j++)
+                {
+                    if (sequence[j] == cells[i])
+                    {
+                        curEntry = j;
+                        break;
+                    }
+                }
+
+                if (foundEntry < curEntry)
+                {
+                    foundEntry = curEntry;
+                    foundIndex = i;
+                }
+            }
+
+            return foundIndex;
+        }
     }
     
     bool lookup(elem_t elem)
