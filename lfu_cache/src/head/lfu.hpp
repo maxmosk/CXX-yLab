@@ -17,28 +17,28 @@ class lfu_pare
     lfu_count_t used;
 
 
-    public:
-        lfu_pare() : key (0), used (0) {}
+public:
+    lfu_pare() : key (0), used (0) {}
 
-        lfu_pare(key_t init_key) : key (init_key), used (1) {}
+    lfu_pare(key_t init_key) : key (init_key), used (1) {}
 
 
-        const key_t getKey() const
-        {
-            return key;
-        }
+    const key_t getKey() const
+    {
+        return key;
+    }
 
-        lfu_count_t getUsed() const
-        {
-            return used;
-        }
+    lfu_count_t getUsed() const
+    {
+        return used;
+    }
 
-        void use()
-        {
-            used++;
-        }
+    void use()
+    {
+        used++;
+    }
 
-        ~lfu_pare() {}
+    ~lfu_pare() {}
 };
 
 
@@ -60,16 +60,10 @@ class lfu_cache
         {
             if (cells[i].getUsed() < minUsed)
             {
-#ifdef __DEBUG
-                printf("*** %zu-th used: %zu\n", i, cells[i].getUsed());
-#endif
                 minUsed = cells[i].getUsed();
                 minIndex = i;
             }
         }
-#ifdef __DEBUG
-        printf("*** Looked up: %zd\n", minIndex);
-#endif
 
         return minIndex;
     }
@@ -93,46 +87,40 @@ class lfu_cache
     }
 
 
-    public:
-        lfu_cache(size_t initSize) : size (initSize), used (0)
+public:
+    lfu_cache(size_t initSize) : size (initSize), used (0)
+    {
+        cells = new lfu_pare<elem_t>[size];
+    }
+
+    lfu_cache(const lfu_cache<elem_t>&src) : size (src->size), used (src->used)
+    {
+        cells = new lfu_pare<elem_t>[size];
+        memcpy(cells, src->cells, size * sizeof *cells);
+    }
+
+
+    bool lookup(const elem_t &elem)
+    {
+        for (size_t i = 0; i < size; i++)
         {
-            cells = new lfu_pare<elem_t>[size];
-        }
-
-        lfu_cache(const lfu_cache<elem_t>&src) : size (src->size), used (src->used)
-        {
-            cells = new lfu_pare<elem_t>[size];
-            memcpy(cells, src->cells, size * sizeof *cells);
-        }
-
-
-        size_t getSize() const
-        {   return size;   }
-
-        bool lookup(const elem_t &elem)
-        {
-            for (size_t i = 0; i < size; i++)
+            if (elem == cells[i].getKey())
             {
-                if (elem == cells[i].getKey())
-                {
-                    cells[i].use();
-#ifdef __DEBUG
-                    printf("*** Hit to cache by index: %zu\n", i);
-#endif
-                    return true;
-                }
+                cells[i].use();
+                return true;
             }
-
-
-            insert(elem);
-            return false;
         }
 
 
-        ~lfu_cache()
-        {
-            delete[] cells;
-        }
+        insert(elem);
+        return false;
+    }
+
+
+    ~lfu_cache()
+    {
+        delete[] cells;
+    }
 };
 
 #endif
