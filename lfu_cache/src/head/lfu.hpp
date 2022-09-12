@@ -46,7 +46,7 @@ template <typename elem_t>
 class lfu_cache
 {
     size_t size;
-    size_t used;
+    size_t used = 0;
     lfu_pare<elem_t> *cells;
     std::unordered_map<elem_t, size_t> finder;
 
@@ -90,7 +90,7 @@ class lfu_cache
 
 
 public:
-    lfu_cache(size_t initSize) : size (initSize), used (0)
+    lfu_cache(size_t initSize) : size (initSize)
     {
         cells = new lfu_pare<elem_t>[size];
     }

@@ -26,13 +26,20 @@ class ideal_cache
             return used - 1;
         }
 
-        for ()
     }
     
-    bool lookup(elem_t item)
+    bool lookup(elem_t elem)
     {
-        auto search = finderCache.find();
-        return search != finderCache.end();
+        auto search = finderCache.find(elem);
+        if (search != finderCache.end())
+        {
+            return true;
+        }
+
+        else
+        {
+
+        }
     }
 
 public:
@@ -40,19 +47,21 @@ public:
     ideal_cache(size_t initSize) : size (initSize), used (0)
     {
         cells = new elem_t[size];
-        memset(cells, 0, size * sizeof (elem_t))
+        memset(cells, 0, size * sizeof (elem_t));
         sequence.reserve(size * 10);
     }
 
 
     size_t getHits()
     {
+        size_t hits = 0;
         size_t nelems = sequence.size();
         for (size_t i = 0; i < nelems; i++)
         {
+            hits += lookup(sequence[i]);
         }
 
-        return 0;
+        return hits;
     }
 
     void putElem(const elem_t &src)
