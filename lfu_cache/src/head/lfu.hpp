@@ -125,5 +125,5 @@ public:
     }
 };
 
-#endif
+#endif // __LFU_H_INCLUDED__
 
