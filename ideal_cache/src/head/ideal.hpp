@@ -130,5 +130,5 @@ public:
     }
 };
 
-#endif
+#endif // __IDEAL_HPP_INCLUDED__
 
