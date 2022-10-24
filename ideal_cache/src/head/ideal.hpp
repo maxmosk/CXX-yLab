@@ -1,5 +1,5 @@
-#ifndef __IDEAL_HPP_INCLUDED__
-#define __IDEAL_HPP_INCLUDED__
+#ifndef IDEAL_HPP_INCLUDED__
+#define IDEAL_HPP_INCLUDED__
 
 #include <vector>
 #include <unordered_map>
@@ -8,7 +8,7 @@
 
 
 template <typename elem_t>
-class ideal_cache
+class ideal_cache final
 {
     //================================== Private
     size_t size;
@@ -130,5 +130,5 @@ public:
     }
 };
 
-#endif // __IDEAL_HPP_INCLUDED__
+#endif // IDEAL_HPP_INCLUDED__
 

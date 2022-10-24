@@ -1,5 +1,5 @@
-#ifndef __LFU_H_INCLUDED__
-#define __LFU_H_INCLUDED__
+#ifndef LFU_H_INCLUDED__
+#define LFU_H_INCLUDED__
 
 #include <cstdlib>
 #include <cstdint>
@@ -11,7 +11,7 @@ typedef size_t lfu_count_t;
 
 
 template <typename key_t>
-class lfu_pare
+class lfu_pare final
 {
     key_t key;
     lfu_count_t used;
@@ -43,7 +43,7 @@ public:
 
 
 template <typename elem_t>
-class lfu_cache
+class lfu_cache final
 {
     size_t size;
     size_t used = 0;
@@ -125,5 +125,5 @@ public:
     }
 };
 
-#endif // __LFU_H_INCLUDED__
+#endif // LFU_H_INCLUDED__
 
