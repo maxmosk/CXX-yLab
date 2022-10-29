@@ -1,6 +1,7 @@
 #ifndef LFU_H_INCLUDED__
 #define LFU_H_INCLUDED__
 
+
 #include <unordered_map>
 #include <vector>
 
@@ -123,6 +124,7 @@ namespace cache
         ~lfu_cache() = default;
     };
 }
+
 
 #endif // LFU_H_INCLUDED__
 

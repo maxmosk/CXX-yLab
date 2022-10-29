@@ -1,10 +1,10 @@
 #ifndef IDEAL_HPP_INCLUDED__
 #define IDEAL_HPP_INCLUDED__
 
-#include <vector>
-#include <unordered_map>
-#include <cstring>
+
 #include <cstdint>
+#include <unordered_map>
+#include <vector>
 
 
 namespace cache
@@ -127,5 +127,6 @@ namespace cache
         ~ideal_cache() = default;
     };
 }
+
 
 #endif // IDEAL_HPP_INCLUDED__
