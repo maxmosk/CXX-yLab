@@ -101,8 +101,8 @@ namespace cache
         //================================== Public
         ideal_cache(size_t initSize) : size (initSize), used (0)
         {
-            cells = std::vector(size);
-            sequence = std::vector(size * 10);
+            cells = std::vector<elem_t>(size);
+            sequence = std::vector<elem_t>(size * 10);
         }
 
 
