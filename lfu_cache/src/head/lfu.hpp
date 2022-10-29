@@ -1,10 +1,8 @@
 #ifndef LFU_H_INCLUDED__
 #define LFU_H_INCLUDED__
 
-#include <cstdlib>
-#include <cstdint>
-#include <cstring>
 #include <unordered_map>
+#include <vector>
 
 
 namespace cache
@@ -49,8 +47,9 @@ namespace cache
     {
         size_t size;
         size_t used = 0;
-        lfu_pare<elem_t> *cells;
+        std::vector<lfu_pare<elem_t>> cells;
         std::unordered_map<elem_t, size_t> finder;
+
 
         size_t lookupLFU() const
         {
@@ -94,7 +93,7 @@ namespace cache
     public:
         lfu_cache(size_t initSize) : size (initSize)
         {
-            cells = new lfu_pare<elem_t>[size];
+            cells.resize(size);
         }
 
         lfu_cache(const lfu_cache<elem_t>&src) : size (src->size), used (src->used)
@@ -121,10 +120,7 @@ namespace cache
         }
 
 
-        ~lfu_cache()
-        {
-            delete[] cells;
-        }
+        ~lfu_cache() = default;
     };
 }
 
