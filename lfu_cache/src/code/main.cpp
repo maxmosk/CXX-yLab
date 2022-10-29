@@ -7,7 +7,7 @@ int main(void)
     int npages = 0;
     scanf("%d", &npages);
 
-    lfu_cache<int> myCache(10);
+    cache::lfu_cache<int> myCache(10);
     
     int nhit = 0;
     int buf = 0;
