@@ -39,7 +39,7 @@ namespace cache
             used++;
         }
 
-        ~lfu_pare() {}
+        ~lfu_pare() = default;
     };
 
 
@@ -54,7 +54,7 @@ namespace cache
 
         size_t lookupLFU() const
         {
-            lfu_count_t minUsed = cells[0].getUsed();
+            lfu_count_t minUsed = cells.at(0).getUsed();
             size_t minIndex = 0;
 
             size_t lookEnd = (size > used) ? (used + 1) : size;
@@ -62,7 +62,7 @@ namespace cache
             {
                 if (cells[i].getUsed() < minUsed)
                 {
-                    minUsed = cells[i].getUsed();
+                    minUsed = cells.at(i).getUsed();
                     minIndex = i;
                 }
             }
@@ -79,8 +79,8 @@ namespace cache
             else
             {
                 size_t indexLFU = lookupLFU();
-                finder.erase(cells[indexLFU].getKey());
-                cells[indexLFU] = lfu_pare<elem_t>(elem);
+                finder.erase(cells.at(indexLFU).getKey());
+                cells.at(indexLFU) = lfu_pare<elem_t>(elem);
                 finder[elem] = indexLFU;
 
                 if (indexLFU < (size - 1))
@@ -103,7 +103,7 @@ namespace cache
             auto search = finder.find(elem);
             if (search != finder.end())
             {
-                cells[finder[elem]].use();
+                cells.at(finder.at(elem)).use();
                 return true;
             }
 
