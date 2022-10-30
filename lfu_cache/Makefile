@@ -8,7 +8,7 @@ LDFLAGS=$(CXXFLAGS_LINK)
 
 
 SOURCEDIR=src/code
-HEADERDIR=src/head
+HEADERDIR=src/include
 BUILDDIR=build
 SOURCES=$(wildcard src/code/*.cpp)
 SOURCES=$(wildcard $(SOURCEDIR)/*.cpp)
