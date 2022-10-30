@@ -85,8 +85,8 @@ namespace cache
             {
                 size_t indexFind = lookupToReplace();
                 
-                finderCache.erase(cells[indexFind]);
-                cells[indexFind] = elem;
+                finderCache.erase(cells.at(indexFind));
+                cells.at(indexFind) = elem;
                 finderCache[elem] = indexFind;
 
                 if (used < size)
@@ -114,7 +114,7 @@ namespace cache
             size_t nelems = sequence.size();
             for (; curPos < nelems; curPos++)
             {
-                hits += lookup(sequence[curPos]);
+                hits += lookup(sequence.at(curPos));
             }
 
             return hits;
