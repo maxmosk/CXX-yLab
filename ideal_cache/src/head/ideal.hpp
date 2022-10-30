@@ -17,10 +17,10 @@ namespace cache
         size_t used = 0;
         std::vector<elem_t> cells;
         
-        std::vector<elem_t> sequence;
+        std::vector<elem_t> sequence = std::vector<elem_t>();
         size_t curPos = 0;
 
-        std::unordered_map<elem_t, size_t> finderCache;
+        std::unordered_map<elem_t, size_t> finderCache = std::unordered_map<elem_t, size_t>();
 
 
         size_t lookupToReplace()
@@ -99,9 +99,11 @@ namespace cache
 
     public:
         //================================== Public
-        ideal_cache(size_t initSize) : size (initSize), used (0)
+        ideal_cache(size_t initSize) :
+            size (initSize),
+            used (0),
+            cells (std::vector<elem_t>(initSize))
         {
-            cells.resize(size);
             sequence.reserve(size * 10);
         }
 

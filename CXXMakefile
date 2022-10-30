@@ -3,7 +3,7 @@ CXXFLAGS_WARNINGS=-Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wpointer-arith \
     -Wcast-align -Wstrict-overflow=2 -Wwrite-strings \
     -Wcast-qual -Wswitch-default -Wswitch-enum \
     -Wunreachable-code -Wformat=2 -Werror -Winit-self -Wuninitialized \
-    -Wpointer-arith \
+    -Wpointer-arith -Weffc++ -Wc++14-compat -Waggressive-loop-optimizations \
     -Wlogical-op \
     -Wduplicated-cond -Wcast-qual -Wcast-align -Wformat-security \
     -Wlarger-than=32768 -Wstack-usage=8192 -Wmissing-declarations \
@@ -16,6 +16,6 @@ CXXFLAGS_WARNINGS=-Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wpointer-arith \
 CFLAGS_FLAGS=-fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr \
     -pie -fcheck-new -fstack-check -fstack-protector -fstrict-overflow \
     -flto-odr-type-merging -fno-omit-frame-pointer -fPIE
-CXXFLAGS_SYNTAX=-pedantic -std=c++11
+CXXFLAGS_SYNTAX=-pedantic -std=c++20
 CXXFLAGS_LINK=-lasan
 CXXFLAGS_DEBUG=-ggdb3 -O0
