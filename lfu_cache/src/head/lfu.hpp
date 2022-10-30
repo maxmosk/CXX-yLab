@@ -48,8 +48,8 @@ namespace cache
     {
         size_t size;
         size_t used = 0;
-        std::vector<lfu_pare<elem_t>> cells;
-        std::unordered_map<elem_t, size_t> finder;
+        std::vector<lfu_pare<elem_t>> cells = std::vector<lfu_pare<elem_t>>{};
+        std::unordered_map<elem_t, size_t> finder = std::unordered_map<elem_t, size_t>{};
 
 
         size_t lookupLFU() const
@@ -95,12 +95,6 @@ namespace cache
         lfu_cache(size_t initSize) : size (initSize)
         {
             cells.resize(size);
-        }
-
-        lfu_cache(const lfu_cache<elem_t>&src) : size (src->size), used (src->used)
-        {
-            cells = new lfu_pare<elem_t>[size];
-            memcpy(cells, src->cells, size * sizeof *cells);
         }
 
 
