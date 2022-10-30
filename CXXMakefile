@@ -6,14 +6,14 @@ CXXFLAGS_WARNINGS=-Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wpointer-arith \
     -Wpointer-arith -Weffc++ -Wc++14-compat -Waggressive-loop-optimizations \
     -Wlogical-op \
     -Wduplicated-cond -Wcast-qual -Wcast-align -Wformat-security \
-    -Wlarger-than=32768 -Wstack-usage=8192 -Wmissing-declarations \
+    -Wlarger-than=262144 -Wstack-usage=8192 -Wmissing-declarations \
     -Wchar-subscripts -Wno-varargs -Wunused -Wvariadic-macros \
     -Wno-missing-field-initializers -Wno-narrowing -Wswitch-default \
     -Wsync-nand -Wsuggest-final-types -Wsign-conversion \
     -Wsuggest-attribute=noreturn -Winline -Wopenmp-simd -Wpacked \
     -Wredundant-decls -Waggressive-loop-optimizations -Wempty-body \
     -Wformat-nonliteral -Wformat-signedness
-CFLAGS_FLAGS=-fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr \
+CXXFLAGS_FLAGS=-fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr \
     -pie -fcheck-new -fstack-check -fstack-protector -fstrict-overflow \
     -flto-odr-type-merging -fno-omit-frame-pointer -fPIE
 CXXFLAGS_SYNTAX=-pedantic -std=c++20

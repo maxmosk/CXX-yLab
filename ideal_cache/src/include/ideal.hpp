@@ -41,7 +41,7 @@ namespace cache
                     size_t curEntry = SIZE_MAX;
                     for (size_t j = curPos; j < seqLen; j++)
                     {
-                        if (sequence[j] == cells[i])
+                        if (sequence.at(j) == cells.at(i))
                         {
                             curEntry = j;
                             break;
@@ -89,7 +89,7 @@ namespace cache
                 cells[indexFind] = elem;
                 finderCache[elem] = indexFind;
 
-                if (indexFind < size)
+                if (used < size)
                 {
                     used++;
                 }
