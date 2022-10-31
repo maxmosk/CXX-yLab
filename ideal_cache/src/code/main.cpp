@@ -1,21 +1,22 @@
-#include <cstdio>
+#include <iostream>
 #include "ideal.hpp"
 
 int main(void)
 {
-    int n = 0;
-    scanf("%d", &n);
+    int npages = 0;
+    size_t cachesize = 0;
+    std::cin >> cachesize >> npages;
 
-    cache::ideal_cache<int> cache(10);
+    cache::ideal_cache<int> cache(cachesize);
 
-    int pageN = 0;
-    for (int i = 0; i < n; i++)
+    int pagenum = 0;
+    for (int i = 0; i < npages; i++)
     {
-        scanf("%d", &pageN);
-        cache.putElem(pageN);
+        std::cin >> pagenum;
+        cache.putElem(pagenum);
     }
 
-    printf("%zu\n", cache.getHits());
+    std::cout << cache.getHits();
 
 
     return 0;
