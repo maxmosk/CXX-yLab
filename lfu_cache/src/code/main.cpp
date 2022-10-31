@@ -1,13 +1,14 @@
-#include <cstdio>
+#include <iostream>
 #include "lfu.hpp"
 
 
 int main(void)
 {
     int npages = 0;
-    scanf("%d", &npages);
+    size_t cachesize = 0;
+    std::cin >> cachesize >> npages;
 
-    cache::lfu_cache<int> myCache(10);
+    cache::lfu_cache<int> myCache(cachesize);
     
     int nhit = 0;
     int buf = 0;
@@ -15,14 +16,14 @@ int main(void)
     {
         do
         {
-            scanf("%d", &buf);
+            std::cin >> buf;
         }
         while (buf == 0);
 
         nhit += myCache.lookup(buf) ? 1 : 0;
     }
 
-    printf("%d\n", nhit);
+    std::cout << nhit << std::endl;
 
     return 0;
 }
