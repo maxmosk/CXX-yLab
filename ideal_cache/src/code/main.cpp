@@ -16,8 +16,7 @@ int main(void)
         cache.putElem(pagenum);
     }
 
-    std::cout << cache.getHits();
-
+    std::cout << cache.getHits() << std::endl;
 
     return 0;
 }
