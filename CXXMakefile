@@ -1,17 +1,16 @@
 CXXC=g++
 CXXFLAGS_WARNINGS=-Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wpointer-arith \
-    -Wcast-align -Wstrict-overflow=2 -Wwrite-strings \
+  	-Wcast-align -Wstrict-overflow=2 -Wwrite-strings \
     -Wcast-qual -Wswitch-default -Wswitch-enum \
     -Wunreachable-code -Winit-self -Wuninitialized \
-    -Wpointer-arith -Weffc++ -Wc++14-compat -Waggressive-loop-optimizations \
+    -Wpointer-arith -Weffc++ -Waggressive-loop-optimizations \
     -Wlogical-op \
     -Wduplicated-cond -Wcast-qual -Wcast-align -Wformat-security \
     -Wstack-usage=8192 -Wmissing-declarations \
     -Wchar-subscripts -Wno-varargs -Wunused -Wvariadic-macros \
-    -Wno-missing-field-initializers -Wno-narrowing -Wswitch-default \
+    -Wno-missing-field-initializers -Wswitch-default \
     -Wsuggest-final-types -Wsign-conversion \
-    -Wredundant-decls -Waggressive-loop-optimizations -Wempty-body \
-    -Wformat-nonliteral -Wformat-signedness
+    -Wredundant-decls -Wempty-body
 CXXFLAGS_FLAGS=-fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr \
     -pie -fcheck-new -fstack-check -fstack-protector -fstrict-overflow \
     -flto-odr-type-merging -fno-omit-frame-pointer -fPIE
