@@ -23,30 +23,36 @@ namespace cache
         std::unordered_map<elem_t, size_t> finderCache = std::unordered_map<elem_t, size_t>();
 
 
-        size_t lookupToReplace()
+        size_t lookupNext(const elem_t &elem)
+        {
+            size_t seqLen = sequence.size();
+
+            for (size_t j = curPos + 1; j < seqLen; j++)
+            {
+                if (sequence.at(j) == elem)
+                {
+                    return j;
+                }
+            }
+
+            return SIZE_MAX;
+        }
+
+        size_t lookupToReplace(const elem_t &elem)
         {
             if (used < size)
             {
-                return used;
+                return used++;
             }
 
             else
             {
                 size_t foundIndex = SIZE_MAX;
                 size_t foundEntry = 0;
-                size_t seqLen = sequence.size();
 
                 for (size_t i = 0; i < used; i++)
                 {
-                    size_t curEntry = SIZE_MAX;
-                    for (size_t j = curPos; j < seqLen; j++)
-                    {
-                        if (sequence.at(j) == cells.at(i))
-                        {
-                            curEntry = j;
-                            break;
-                        }
-                    }
+                    size_t curEntry = lookupNext(cells.at(i));        
 
                     if (foundEntry < curEntry)
                     {
@@ -55,11 +61,18 @@ namespace cache
                     }
                 }
 
-                return foundIndex;
+                if (foundEntry > lookupNext(elem))
+                {
+                    return foundIndex;
+                }
+                else
+                {
+                    return SIZE_MAX;
+                }
             }
         }
         
-        bool lookup(elem_t elem)
+        bool lookup(const elem_t &elem)
         {
             auto search = finderCache.find(elem);
             if (search != finderCache.end())
@@ -74,7 +87,7 @@ namespace cache
             }
         }
 
-        void insert(elem_t elem)
+        void insert(const elem_t &elem)
         {
             if (size == 0)
             {
@@ -83,15 +96,13 @@ namespace cache
 
             else
             {
-                size_t indexFind = lookupToReplace();
-                
-                finderCache.erase(cells.at(indexFind));
-                cells.at(indexFind) = elem;
-                finderCache[elem] = indexFind;
+                size_t indexFind = lookupToReplace(elem);
 
-                if (used < size)
-                {
-                    used++;
+                if (indexFind != SIZE_MAX)
+                {                
+                    finderCache.erase(cells.at(indexFind));
+                    cells.at(indexFind) = elem;
+                    finderCache[elem] = indexFind;
                 }
             }
         }
@@ -114,9 +125,7 @@ namespace cache
             size_t nelems = sequence.size();
             for (; curPos < nelems; curPos++)
             {
-                dump(std::cout);
                 hits += lookup(sequence.at(curPos));
-                dump(std::cout);
             }
 
             return hits;
@@ -130,6 +139,7 @@ namespace cache
 
         void dump(std::ostream &os)
         {
+            os << std::endl;
             os << "Size: " << size << std::endl;
             os << "Used: " << used << std::endl;
             os << "Pos: " << used << std::endl;
@@ -139,7 +149,7 @@ namespace cache
             {
                 os << " " << cells.at(i);
             }
-            os << std::endl;
+            os << std::endl << std::endl;
         }
 
 
@@ -149,3 +159,4 @@ namespace cache
 
 
 #endif // IDEAL_HPP_INCLUDED__
+
