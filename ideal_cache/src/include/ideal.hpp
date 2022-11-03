@@ -114,7 +114,9 @@ namespace cache
             size_t nelems = sequence.size();
             for (; curPos < nelems; curPos++)
             {
+                dump(std::cout);
                 hits += lookup(sequence.at(curPos));
+                dump(std::cout);
             }
 
             return hits;
@@ -123,6 +125,21 @@ namespace cache
         void putElem(const elem_t &src)
         {
             sequence.push_back(src);
+        }
+
+
+        void dump(std::ostream &os)
+        {
+            os << "Size: " << size << std::endl;
+            os << "Used: " << used << std::endl;
+            os << "Pos: " << used << std::endl;
+
+            os << "Pages:";
+            for (size_t i = 0; i < used; i++)
+            {
+                os << " " << cells.at(i);
+            }
+            os << std::endl;
         }
 
 

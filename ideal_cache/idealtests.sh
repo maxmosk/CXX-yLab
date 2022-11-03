@@ -10,6 +10,7 @@ while IFS=% read -r source exp; do
         fi
         I=$((I+1))
 done <<END
+    4 12 1 2 3 4 1 2 5 1 2 4 3 4%7
     10 0%0
     10 1 1%0
     10 5 1 2 3 4 5%0
