@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(CacheLFU LANGUAGES CXX)
+project(cache LANGUAGES CXX)
 
 include_directories(lfu_cache/src/include ideal_cache/src/include)
 
@@ -14,5 +14,5 @@ add_executable(
     ideal_cache/src/code/main.cpp
 )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -std=c++20 -pedantic")
 
