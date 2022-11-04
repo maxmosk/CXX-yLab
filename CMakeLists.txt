@@ -14,5 +14,7 @@ add_executable(
     ideal_cache/src/code/main.cpp
 )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -std=c++20 -pedantic")
+set (CMAKE_CXX_STANDARD 20)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 
