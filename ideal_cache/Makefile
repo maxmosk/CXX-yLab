@@ -1,10 +1,8 @@
-.PHONY: all clean tests docker_tests
+.PHONY: all clean
 
-include ../CXXMakefile
 
-#Compiler flags
-CXXFLAGS=$(CXXFLAGS_WARNINGS) $(CXXFLAGS_SYNTAX) $(CXXFLAGS_DEBUG)
-LDFLAGS=$(CXXFLAGS_LINK)
+CXXC=g++
+CXXFLAGS=-Wall -Wextra -Weffc++ -Wunused -Wswitch-default -Wswitch-enum -Werror -Wundef -Wshadow -pedantic -std=c++20
 
 
 SOURCEDIR=src/code
@@ -19,14 +17,14 @@ EXECUTABLE=$(BUILDDIR)/ideal
 
 all: dir $(EXECUTABLE)
 
-debug: CXXFLAGS+= $(CXXFLAGS_FLAGS)
+debug: CXXFLAGS+= -ggdb3 -O0 -fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined -pie -fcheck-new -fstack-check -fstack-protector -fstrict-overflow -flto-odr-type-merging -fno-omit-frame-pointer -fPIE -lasan
 debug: all
 
 dir:
 	mkdir $(BUILDDIR)
 
 $(EXECUTABLE): $(OBJFILES)
-	$(CXXC) $(CXXFLAGS) $(LDFLAGS) -o $@ $?
+	$(CXXC) $(CXXFLAGS) -o $@ $?
 
 $(OBJFILES): $(BUILDDIR)/%.o : $(SOURCEDIR)/%.cpp $(HEADFILES)
 	$(CXXC) -c $(CXXFLAGS) -I$(HEADERDIR) -o $@ $<
@@ -34,3 +32,4 @@ $(OBJFILES): $(BUILDDIR)/%.o : $(SOURCEDIR)/%.cpp $(HEADFILES)
 
 clean:
 	rm -rf $(BUILDDIR)
+
