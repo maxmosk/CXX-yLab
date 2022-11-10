@@ -14,7 +14,6 @@ add_executable(
     ideal_cache/src/code/main.cpp
 )
 
-set (CMAKE_CXX_STANDARD 20)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+target_compile_features(lfu   PUBLIC cxx_std_20)
+target_compile_features(ideal PUBLIC cxx_std_20)
 
