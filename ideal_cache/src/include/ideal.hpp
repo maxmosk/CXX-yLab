@@ -3,6 +3,7 @@
 
 
 #include <cstdint>
+#include <iostream>
 #include <unordered_map>
 #include <vector>
 
@@ -13,21 +14,21 @@ namespace cache
     class ideal_cache final
     {
         //================================== Private
-        size_t size;
-        size_t used = 0;
+        std::size_t size;
+        std::size_t used = 0;
         std::vector<elem_t> cells;
         
         std::vector<elem_t> sequence = std::vector<elem_t>();
         size_t curPos = 0;
 
-        std::unordered_map<elem_t, size_t> finderCache = std::unordered_map<elem_t, size_t>();
+        std::unordered_map<elem_t, std::size_t> finderCache = std::unordered_map<elem_t, std::size_t>();
 
 
-        size_t lookupNext(const elem_t &elem)
+        std::size_t lookupNext(const elem_t &elem)
         {
-            size_t seqLen = sequence.size();
+            std::size_t seqLen = sequence.size();
 
-            for (size_t j = curPos + 1; j < seqLen; j++)
+            for (std::size_t j = curPos + 1; j < seqLen; j++)
             {
                 if (sequence.at(j) == elem)
                 {
@@ -38,7 +39,7 @@ namespace cache
             return SIZE_MAX;
         }
 
-        size_t lookupToReplace(const elem_t &elem)
+        std::size_t lookupToReplace(const elem_t &elem)
         {
             if (used < size)
             {
@@ -47,12 +48,12 @@ namespace cache
 
             else
             {
-                size_t foundIndex = SIZE_MAX;
-                size_t foundEntry = 0;
+                std::size_t foundIndex = SIZE_MAX;
+                std::size_t foundEntry = 0;
 
-                for (size_t i = 0; i < used; i++)
+                for (std::size_t i = 0; i < used; i++)
                 {
-                    size_t curEntry = lookupNext(cells.at(i));        
+                    std::size_t curEntry = lookupNext(cells.at(i));        
 
                     if (foundEntry < curEntry)
                     {
@@ -96,7 +97,7 @@ namespace cache
 
             else
             {
-                size_t indexFind = lookupToReplace(elem);
+                std::size_t indexFind = lookupToReplace(elem);
 
                 if (indexFind != SIZE_MAX)
                 {                
@@ -110,7 +111,7 @@ namespace cache
 
     public:
         //================================== Public
-        ideal_cache(size_t initSize) :
+        ideal_cache(std::size_t initSize) :
             size (initSize),
             used (0),
             cells (std::vector<elem_t>(initSize))
@@ -119,10 +120,10 @@ namespace cache
         }
 
 
-        size_t getHits()
+        std::size_t getHits()
         {
-            size_t hits = 0;
-            size_t nelems = sequence.size();
+            std::size_t hits = 0;
+            std::size_t nelems = sequence.size();
             for (; curPos < nelems; curPos++)
             {
                 hits += lookup(sequence.at(curPos));
@@ -145,7 +146,7 @@ namespace cache
             os << "Pos: " << used << std::endl;
 
             os << "Pages:";
-            for (size_t i = 0; i < used; i++)
+            for (std::size_t i = 0; i < used; i++)
             {
                 os << " " << cells.at(i);
             }

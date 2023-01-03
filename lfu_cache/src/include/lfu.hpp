@@ -8,7 +8,7 @@
 
 namespace cache
 {
-    typedef size_t lfu_count_t;
+    typedef std::size_t lfu_count_t;
 
 
     template <typename key_t>
@@ -46,19 +46,19 @@ namespace cache
     template <typename elem_t>
     class lfu_cache final
     {
-        size_t size;
-        size_t used = 0;
+        std::size_t size;
+        std::size_t used = 0;
         std::vector<lfu_pare<elem_t>> cells = std::vector<lfu_pare<elem_t>>{};
-        std::unordered_map<elem_t, size_t> finder = std::unordered_map<elem_t, size_t>{};
+        std::unordered_map<elem_t, std::size_t> finder = std::unordered_map<elem_t, std::size_t>{};
 
 
-        size_t lookupLFU() const
+        std::size_t lookupLFU() const
         {
             lfu_count_t minUsed = cells.at(0).getUsed();
-            size_t minIndex = 0;
+            std::size_t minIndex = 0;
 
-            size_t lookEnd = (size > used) ? (used + 1) : size;
-            for (size_t i = 0; i < lookEnd; i++)
+            std::size_t lookEnd = (size > used) ? (used + 1) : size;
+            for (std::size_t i = 0; i < lookEnd; i++)
             {
                 if (cells[i].getUsed() < minUsed)
                 {
@@ -78,7 +78,7 @@ namespace cache
             }
             else
             {
-                size_t indexLFU = lookupLFU();
+                std::size_t indexLFU = lookupLFU();
                 finder.erase(cells.at(indexLFU).getKey());
                 cells.at(indexLFU) = lfu_pare<elem_t>(elem);
                 finder[elem] = indexLFU;
@@ -92,7 +92,7 @@ namespace cache
 
 
     public:
-        lfu_cache(size_t initSize) : size (initSize)
+        lfu_cache(std::size_t initSize) : size (initSize)
         {
             cells.resize(size);
         }
